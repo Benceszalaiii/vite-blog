@@ -5,7 +5,7 @@ export const renderNavbar = (): string => {
   const user = getUser();
 
   return `
-    <nav class="navbar">
+    <nav class="navbar sticky top-0">
       <div class="nav-container">
         <a href="#/" class="brand">Vite<span>Blog</span></a>
         <div class="nav-links">
