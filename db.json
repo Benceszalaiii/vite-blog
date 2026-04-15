@@ -4,7 +4,7 @@
       "id": 1,
       "username": "admin",
       "password": "admin123",
-      "role": "admin",
+      "role": "adminisztrator",
       "nev": "Nagy Péter"
     },
     {
@@ -22,8 +22,8 @@
       "userId": 2
     },
     {
-      "id": 1776252114092,
-      "token": "2c06cba0e8712ebd5f6af257e5801a0f42b953b8a06ccb40677dee672f5bcc91",
+      "id": 1776253180277,
+      "token": "9c00fc4e9e3f4761c4a2fb0f26afac58dbfa264a93f567d62a24bb6c8e72c1fb",
       "userId": 1
     }
   ],

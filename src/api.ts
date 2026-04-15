@@ -43,6 +43,13 @@ export const fetchPosts = async (
   return { posts, totalCount };
 };
 
+export const fetchPostsByUser = async (nev: string): Promise<{ posts: Post[]; totalCount: number }> => {
+  const response = await fetch(`${API_URL}/posts?szerzo=${nev}`);
+  if (!response.ok) throw new Error('Nem sikerült betölteni a posztokat!');
+  const totalCount = parseInt(response.headers.get('X-Total-Count') || '0', 10);
+  const posts = await response.json();
+  return { posts, totalCount };
+};
 
 // AUTENTIKÁCIÓ
 
