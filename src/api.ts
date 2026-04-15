@@ -8,6 +8,12 @@ export const fetchCategories = async (): Promise<Category[]> => {
   return response.json();
 };
 
+export const fetchPost = async (id: number): Promise<Post> => {
+  const response = await fetch(`${API_URL}/posts/${id}`);
+  if (!response.ok) throw new Error('Failed to fetch post');
+  return response.json();
+};
+
 export const fetchPosts = async (
   page: number = 1,
   limit: number = 6,

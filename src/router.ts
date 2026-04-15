@@ -1,4 +1,5 @@
 import { renderHome } from './pages/home';
+import { renderPost } from './pages/post';
 
 export const initRouter = (appElement: HTMLElement) => {
   const router = () => {
@@ -12,7 +13,7 @@ export const initRouter = (appElement: HTMLElement) => {
       appElement.innerHTML = '<h2>Vezérlőpult hamarosan...</h2>';
     } else if (hash.startsWith('#/blog/')) {
       const id = parseInt(hash.split('/')[2]);
-      appElement.innerHTML = `<h2>Bejegyzés ${id} hamarosan...</h2>`;
+      renderPost(appElement, id);
     } else {
       appElement.innerHTML = '<div class="error">A keresett oldal nem található.</div>';
     }

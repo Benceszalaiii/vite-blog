@@ -24,6 +24,7 @@ export const renderNavbar = (): string => {
         </div>
       </div>
     </nav>
+
   `;
 };
 
