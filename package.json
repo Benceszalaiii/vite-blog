@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "concurrently \"node server.js\" \"vite\""
   },
   "dependencies": {
     "json-server": "^0.17.4",
