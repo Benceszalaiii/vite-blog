@@ -1,6 +1,7 @@
 // src/pages/login.ts
 import { isLoggedIn, saveUser } from '../store';
 import { renderNavbar, attachNavbarEvents } from '../components/navbar';
+import { login } from '../api';
 
 export const renderLogin = (container: HTMLElement) => {
     // Ha a felhasználó már be van jelentkezve, a login oldal automatikusan a dashboardra irányít
@@ -62,19 +63,7 @@ export const renderLogin = (container: HTMLElement) => {
 
         try {
             // Login fetch request elküldése
-            const response = await fetch('http://localhost:3001/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || 'Hibás felhasználónév vagy jelszó!');
-            }
+            const data = await login(username, password);
 
             // Adatok mentése a localStorage-ba
             saveUser(data.user, data.token);

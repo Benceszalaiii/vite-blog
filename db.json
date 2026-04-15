@@ -17,14 +17,14 @@
   ],
   "tokens": [
     {
-      "id": 1776250700260,
-      "token": "01df03630218da0e1766c7b2a01365ae6248c371ca99a068adcb7201fcce0ed8",
-      "userId": 1
-    },
-    {
       "id": 1776251402789,
       "token": "4e6f4b5ab1e1b93b402005489a9a8cb0befd9328368b8948e7a7c76771575f07",
       "userId": 2
+    },
+    {
+      "id": 1776252114092,
+      "token": "2c06cba0e8712ebd5f6af257e5801a0f42b953b8a06ccb40677dee672f5bcc91",
+      "userId": 1
     }
   ],
   "categories": [
