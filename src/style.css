@@ -170,7 +170,7 @@ a {
   color: var(--text-muted);
 }
 
-input[type="text"],
+input,
 select {
   width: 100%;
   background: var(--surface-color);
@@ -184,11 +184,11 @@ select {
   outline: none;
 }
 
-input[type="text"] {
+input {
   padding-left: 3rem;
 }
 
-input[type="text"]:focus,
+input:focus,
 select:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
