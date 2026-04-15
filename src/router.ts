@@ -1,5 +1,6 @@
 import { renderDashboard } from './pages/dashboard';
 import { renderHome } from './pages/home';
+import { renderLogin } from './pages/login';
 import { renderPost } from './pages/post';
 import { renderTestPage } from './pages/test';
 
@@ -10,7 +11,7 @@ export const initRouter = (appElement: HTMLElement) => {
     if (hash === '#/') {
       renderHome(appElement);
     } else if (hash === '#/login') {
-      appElement.innerHTML = '<h2>Bejelentkezés hamarosan...</h2>';
+      renderLogin(appElement);
     } else if (hash === '#/dashboard') {
       renderDashboard(appElement);
     } else if (hash.startsWith('#/blog/')) {
