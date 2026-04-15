@@ -1,6 +1,7 @@
 {
   "name": "blog-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Blog projekt backend – json-server + egyedi auth middleware",
   "main": "server.js",
   "scripts": {
@@ -8,8 +9,10 @@
     "dev": "concurrently \"node server.js\" \"vite\""
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
     "concurrently": "^9.2.1",
     "json-server": "^0.17.4",
-    "vite": "^8.0.8"
+    "tailwindcss": "^4.2.2",
+    "vite": "^6.0.8"
   }
 }

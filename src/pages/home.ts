@@ -86,7 +86,6 @@ const loadAndRenderPosts = async () => {
 
   try {
     const { posts, totalCount } = await fetchPosts(currentPage, limit, currentSearch, currentCategory);
-    
     if (posts.length === 0) {
       postsContainer.innerHTML = '<div class="empty-state">Nincs a feltételeknek megfelelő bejegyzés.</div>';
       paginationContainer.innerHTML = '';
@@ -96,15 +95,16 @@ const loadAndRenderPosts = async () => {
     postsContainer.innerHTML = posts.map(post => {
       const categoryName = categoriesMap.get(post.categoryId)?.name || 'Ismeretlen';
       const defaultImg = 'https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&q=80&w=800&h=450';
-      
+
       return `
-        <article class="post-card">
+      <a href="#/blog/${post.id}">
+      <article class="post-card">
           <div class="post-image">
             <img src="${post.boritekep || defaultImg}" alt="${post.cim}" loading="lazy" />
             <span class="post-category">${categoryName}</span>
           </div>
           <div class="post-content">
-            <h2 class="post-title"><a href="#/blog/${post.id}">${post.cim}</a></h2>
+            <h2 class="post-title">${post.cim}</h2>
             <p class="post-excerpt">${post.kivonat}</p>
             <div class="post-meta">
               <div class="post-author">
@@ -115,6 +115,7 @@ const loadAndRenderPosts = async () => {
             </div>
           </div>
         </article>
+        </a>
       `;
     }).join('');
 

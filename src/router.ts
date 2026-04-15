@@ -1,6 +1,8 @@
+import { renderDashboard } from './pages/dashboard';
 import { renderHome } from './pages/home';
 import { renderLogin } from './pages/login';
 import { renderPost } from './pages/post';
+import { renderTestPage } from './pages/test';
 
 export const initRouter = (appElement: HTMLElement) => {
   const router = () => {
@@ -11,10 +13,12 @@ export const initRouter = (appElement: HTMLElement) => {
     } else if (hash === '#/login') {
       renderLogin(appElement);
     } else if (hash === '#/dashboard') {
-      appElement.innerHTML = '<h2>Vezérlőpult hamarosan...</h2>';
+      renderDashboard(appElement);
     } else if (hash.startsWith('#/blog/')) {
       const id = parseInt(hash.split('/')[2]);
       renderPost(appElement, id);
+    } else if (hash.startsWith('#/test')) {
+      renderTestPage(appElement);
     } else {
       appElement.innerHTML = '<div class="error">A keresett oldal nem található.</div>';
     }
