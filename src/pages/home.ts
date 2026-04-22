@@ -85,7 +85,7 @@ const loadAndRenderPosts = async () => {
   postsContainer.innerHTML = '<div class="loader"></div>';
 
   try {
-    const { posts, totalCount } = await fetchPosts(currentPage, limit, currentSearch, currentCategory);
+    const { posts, totalCount } = await fetchPosts({page: currentPage, limit, searchQuery: currentSearch, categoryId: currentCategory});
     if (posts.length === 0) {
       postsContainer.innerHTML = '<div class="empty-state">Nincs a feltételeknek megfelelő bejegyzés.</div>';
       paginationContainer.innerHTML = '';

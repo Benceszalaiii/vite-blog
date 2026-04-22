@@ -1,11 +1,30 @@
 import { fetchCategories, fetchPost } from "../api";
 import { attachNavbarEvents, renderNavbar } from "../components/navbar";
+import { Post } from "../types";
 
-export const renderPost = async (container: HTMLElement, id: number) => {
-    const post = await fetchPost(id);
-    const category = (await fetchCategories()).find((x)=> x.id === post.categoryId);
-     container.innerHTML = `
+const notFoundPage = ({message, errorCode = "404 - Az oldal nem található"} : {message: string, errorCode: string}) => {
+    return `
+    <main>
     ${renderNavbar()}
+    <section class="min-h-[80vh] gap-4 flex flex-col items-center justify-center">
+    <h1 class="text-red-500 font-bold text-2xl">${errorCode}</h1>
+    <p class="text-lg">${message}</p>
+    </section>
+    </main>
+    `;
+}
+type IdOrPost =
+  | number
+  | Post;
+export const renderPost = async (container: HTMLElement, data: IdOrPost, preview: boolean = false) => {
+    const post = typeof data === "number" ? await fetchPost(data) : data;
+    if (!post) {
+      container.innerHTML = notFoundPage({message: `A keresett blog nem létezik ${data} azonosítóval`, errorCode: `404 - Nem található`});
+      return;
+    }
+    const category = (await fetchCategories()).find((x)=> x.id === post.categoryId);
+    container.innerHTML = `
+    ${preview ? "" : renderNavbar()}
      <div style="position: relative; height: 80vh; background-image: url(${post.boritekep}); background-repeat: no-repeat; background-position: center; background-size: cover; display: flex; align-items: flex-end;">
       <div style="max-width: 80rem; margin: 0 auto; z-index: 10; position: relative; display: grid; grid-template-columns: 1fr 48rem 1fr; color: white; padding-bottom: 2rem;">
         <div style="grid-column: 2 / span 2;">

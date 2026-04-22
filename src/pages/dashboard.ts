@@ -26,18 +26,23 @@ export const renderDashboard = async(container: HTMLElement) => {
           <p style="color: var(--text-muted);">Üdvözöllek, <span style="color: var(--primary-color); font-weight: 600;">${user?.nev}</span>!</p>
         </div>
       </div>
-    <section class="w-full max-w-5xl mx-auto flex flex-row flex-nowrap justify-between items-center mb-2.5">  
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-        <div class="card" style="padding: 2rem; background: var(--surface-color); border-radius: 16px; border: 1px solid var(--surface-border);">
+    <section class="w-full max-w-5xl mx-auto mb-2.5">  
+      <div class="flex flex-row flex-wrap gap-4 justify-center items-center">
+        <div class="card min-w-52 w-1/4" style="padding: 2rem; background: var(--surface-color); border-radius: 16px; border: 1px solid var(--surface-border);">
           <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Statisztikák</h3>
           <p style="font-size: 2.5rem; font-weight: 700;">${posts.totalCount}</p>
           <p style="color: var(--text-muted);">Összes poszt</p>
         </div>
         
-        <div class="card" style="padding: 2rem; background: var(--surface-color); border-radius: 16px; border: 1px solid var(--surface-border);">
+        <div class="card min-w-52 w-1/4" style="padding: 2rem; background: var(--surface-color); border-radius: 16px; border: 1px solid var(--surface-border);">
           <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Statisztikák</h3>
           <p style="font-size: 2.5rem; font-weight: 700;">${posts.posts.filter(post => post.szerzo === user?.nev).length}</p>
           <p style="color: var(--text-muted);">Saját posztok</p>
+        </div>
+        <div class="card min-w-52 w-1/4" style="padding: 2rem; background: var(--surface-color); border-radius: 16px; border: 1px solid var(--surface-border);">
+          <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Statisztikák</h3>
+          <p style="font-size: 2.5rem; font-weight: 700;">${posts.posts.filter(post => post.szerzo === user?.nev).map(post => post.tartalom.split(" ").length).reduce((a, b) => a + b, 0)}</p>
+          <p style="color: var(--text-muted);">Írt szavak</p>
         </div>
         </div>
         </section>

@@ -11,18 +11,16 @@ export const fetchCategories = async (): Promise<Category[]> => {
   return response.json();
 };
 
-export const fetchPost = async (id: number): Promise<Post> => {
+export const fetchPost = async (id: number): Promise<Post | null> => {
   const response = await fetch(`${API_URL}/posts/${id}`);
-  if (!response.ok) throw new Error('Failed to fetch post');
+  if (!response.ok) return null;
   return response.json();
 };
 
 export const fetchPosts = async (
-  page: number = 1,
-  limit: number = 6,
-  searchQuery: string = '',
-  categoryId: string = ''
+  data?: { page?: number, limit?: number, searchQuery?: string, categoryId?: string }
 ): Promise<{ posts: Post[]; totalCount: number }> => {
+  let { page = 1, limit = 6, searchQuery = '', categoryId = '' } = data || {};
 
   let url = `${API_URL}/posts?_page=${page}&_limit=${limit}`;
 

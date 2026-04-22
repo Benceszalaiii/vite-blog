@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
-
+@layer utilities{
 :root {
   --primary-color: #6366f1;
   --primary-hover: #4f46e5;
@@ -399,4 +399,5 @@ select:focus {
   .search-box, .filter-box {
     width: 100%;
   }
+}
 }
