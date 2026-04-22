@@ -16,7 +16,8 @@ export const renderDashboard = async(container: HTMLElement) => {
         window.location.hash = '#/';
         return;
     }
-    const posts = await fetchPosts();
+    const posts = await fetchPosts({limit: 20});
+    const blogList = BlogList(posts.posts);
     container.innerHTML = `
     ${renderNavbar()}
     <main class="w-full mx-auto flex flex-col gap-16 items-center justify-center">
@@ -48,21 +49,12 @@ export const renderDashboard = async(container: HTMLElement) => {
         </section>
 
 
-        ${BlogList(posts.posts)}
+        ${blogList.content}
     </main>
   `;
 
+    blogList.attachEvents();
     // A navbar gombjainak eseménykezelői
     attachNavbarEvents();
 
-    // Kijelentkezés gomb eseménykezelése
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            // Felhasználó kijelentkeztetése
-            clearUser();
-            // Átirányítás a főoldalra
-            window.location.hash = '#/';
-        });
-    }
 };
