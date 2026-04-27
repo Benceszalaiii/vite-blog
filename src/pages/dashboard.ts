@@ -3,22 +3,23 @@ import { fetchPosts } from '../api';
 import { BlogList } from '../components/bloglist';
 import { renderNavbar, attachNavbarEvents } from '../components/navbar';
 import { clearUser, getUser, isLoggedIn } from '../store';
+import { showToast } from '../utils/toast';
 
-export const renderDashboard = async(container: HTMLElement) => {
-    // Ha a felhasználó nincs bejelentkezve, átirányítás a login oldalra
-    if (!isLoggedIn()) {
-        window.location.hash = '#/login';
-        return;
-    }
+export const renderDashboard = async (container: HTMLElement) => {
+  // Ha a felhasználó nincs bejelentkezve, átirányítás a login oldalra
+  if (!isLoggedIn()) {
+    window.location.hash = '#/login';
+    return;
+  }
 
-    const user = getUser();
-    if (!user || (user?.role !== "admin" && user?.role !== "adminisztrator")){
-        window.location.hash = '#/';
-        return;
-    }
-    const posts = await fetchPosts({limit: 20});
-    const blogList = BlogList(posts.posts);
-    container.innerHTML = `
+  const user = getUser();
+  if (!user || (user?.role !== "admin" && user?.role !== "adminisztrator")) {
+    window.location.hash = '#/';
+    return;
+  }
+  const posts = await fetchPosts({ limit: 20 });
+  const blogList = BlogList(posts.posts);
+  container.innerHTML = `
     ${renderNavbar()}
     <main class="w-full mx-auto flex flex-col gap-16 items-center justify-center">
     <div class="w-full max-w-5xl mx-auto flex justify-between items-center mb-2.5">
@@ -53,8 +54,9 @@ export const renderDashboard = async(container: HTMLElement) => {
     </main>
   `;
 
-    blogList.attachEvents();
-    // A navbar gombjainak eseménykezelői
-    attachNavbarEvents();
+  blogList.attachEvents();
+  // A navbar gombjainak eseménykezelői
+  attachNavbarEvents();
 
+  if (window.location.search.includes("success")) showToast("Sikeres mentés", "success", 3000, () => window.location.replace("/#/dashboard"));
 };

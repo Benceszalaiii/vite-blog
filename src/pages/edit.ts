@@ -137,7 +137,9 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
   });
   formElement.addEventListener("submit", async (e) => {
     e.preventDefault();
-    await fetch(`${getApiUrl()}/posts/${currentData.id}`, {
+    console.log("help")
+
+    const response = await fetch(`${getApiUrl()}/posts/${currentData.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -145,6 +147,11 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
       },
       body: JSON.stringify(currentData),
     });
+
+    console.log(response);
+    if (response.ok) {
+      window.location.replace("/?success#/dashboard");
+    }
   });
 
   const input = document.getElementById("imageUrl") as HTMLInputElement;
@@ -154,6 +161,7 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
   input.addEventListener("input", () => {
     imagePreview.src = input.value;
   });
+
   const closePreview = () => {
     document.body.style.overflow = "auto";
     previewDiv.classList.remove("flex");
@@ -164,6 +172,7 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
     previewDiv.classList.remove("hidden");
     previewDiv.classList.add("flex");
   };
+
   const previewBtn = document.querySelector('button[type="button"]');
   const previewDiv = document.getElementById("preview") as HTMLDivElement;
   previewBtn?.addEventListener("click", async () => {
@@ -174,23 +183,30 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
         <button id="close-preview" class="text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg py-2 px-4 transition-colors fixed bottom-8 z-100 right-8 cursor-pointer">Bezárás</button>
         </div>
         `;
+
     const previewContainer = document.getElementById(
       "preview-container",
     ) as HTMLDivElement;
+
     await renderPreview(previewContainer, currentData);
+
     const closePreviewBtn = document.getElementById("close-preview");
     closePreviewBtn?.addEventListener("click", () => {
       closePreview();
     });
+
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         closePreview();
       }
     });
+
     openPreview();
   });
+
   window.addEventListener("hashchange", () => {
     document.body.style.overflow = "auto";
   });
+
   attachNavbarEvents();
 };
