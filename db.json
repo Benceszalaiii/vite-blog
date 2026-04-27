@@ -17,14 +17,14 @@
   ],
   "tokens": [
     {
-      "id": 1776251402789,
-      "token": "4e6f4b5ab1e1b93b402005489a9a8cb0befd9328368b8948e7a7c76771575f07",
-      "userId": 2
+      "id": 1777305189065,
+      "token": "9d0ae9a542f79b337e2d894a25bddcc30bd204d4c5e95abe05339fb49e057768",
+      "userId": 1
     },
     {
-      "id": 1776838625376,
-      "token": "ecf1e7d1e32bc12e10c2d64550870c3a938be80ca8d7b9c1e3d4c84bad8e1657",
-      "userId": 1
+      "id": 1777305855489,
+      "token": "ea220c182bdc8b6b790f2e8635ab35577c1f2e488046abff67514ee036a9a884",
+      "userId": 2
     }
   ],
   "categories": [
@@ -61,15 +61,15 @@
   ],
   "posts": [
     {
-      "id": 1,
       "cim": "A mesterséges intelligencia jövője",
-      "tartalom": "A mesterséges intelligencia (MI) napjainkra az élet szinte minden területét áthatja. Az orvostudományban képes daganatokat azonosítani a röntgenfelvételeken, a közlekedésben önvezető autók alapja, a pénzügyi szektorban pedig frauddetekciót végez másodpercek alatt. A kutatók egyre ambiciózusabb célokat tűznek ki: az általános mesterséges intelligencia (AGI) elérése, amely emberi szintű gondolkodásra képes, már nem tűnik tudományos fantasztikumnak. Ugyanakkor a technológia etikai kérdéseket is felvet: ki a felelős egy MI döntéséért? Hogyan védjük meg az adatainkat? Ezekre a kérdésekre a társadalomnak és a törvényhozóknak együtt kell megtalálniuk a választ.",
-      "kivonat": "A mesterséges intelligencia forradalmasítja az orvostudományt, a közlekedést és a pénzügyet – de etikai kérdések is felmerülnek.",
-      "categoryId": 1,
-      "szerzo": "Nagy Péter",
-      "datum": "2025-01-15",
       "boritekep": "https://picsum.photos/seed/ai/800/450",
-      "kiemelt": true
+      "kivonat": "A mesterséges intelligencia forradalmasítja az orvostudományt, a közlekedést és a pénzügyet – de etikai kérdések is felmerülnek.",
+      "tartalom": "A mesterséges intelligencia (MI) napjainkra az élet szinte minden területét áthatja. Az orvostudományban képes daganatokat azonosítani a röntgenfelvételeken, a közlekedésben önvezető autók alapja, a pénzügyi szektorban pedig frauddetekciót végez másodpercek alatt. A kutatók egyre ambiciózusabb célokat tűznek ki: az általános mesterséges intelligencia (AGI) elérése, amely emberi szintű gondolkodásra képes, már nem tűnik tudományos fantasztikumnak. Ugyanakkor a technológia etikai kérdéseket is felvet: ki a felelős egy MI döntéséért? Hogyan védjük meg az adatainkat? Ezekre a kérdésekre a társadalomnak és a törvényhozóknak együtt kell megtalálniuk a választ.",
+      "categoryId": 1,
+      "datum": "2025-01-15",
+      "kiemelt": true,
+      "id": 1,
+      "szerzo": "Nagy Péter"
     },
     {
       "id": 2,

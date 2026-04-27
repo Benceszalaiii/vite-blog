@@ -3,6 +3,7 @@ import { getToken, getUser, isLoggedIn } from "../store";
 import { fetchCategories, fetchPost, getApiUrl } from "../api";
 import { Category, Post } from "../types";
 import { renderPreview } from "./preview";
+import { showToast } from "../utils/toast";
 
 const notFoundPage = ({
   message,
@@ -91,7 +92,7 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
     <div class="flex flex-row justify-end w-full gap-4">
     <button id="saveBtn" class=" bg-violet-700 hover:bg-violet-800 mb-2 w-fit px-8 py-2 bg-primary-color text-white rounded-md hover:opacity-80 transition-all cursor-pointer" type="submit">Mentés</button>
     <button id="previewBtn" type="button" class="bg-emerald-700 hover:bg-emerald-800 mb-2 w-fit px-8 py-2 bg-primary-color text-white rounded-md hover:opacity-80 transition-all cursor-pointer">Előnézet</button>
-    <button id="deleteBtn" class=" bg-red-700 hover:bg-red-800 mb-2 w-fit px-6 py-2 bg-primary-color text-white rounded-md hover:opacity-80 transition-all cursor-pointer" type="submit">Törlés</button>
+    ${user.role === "admin" ? '<button id="deleteBtn" class=" bg-red-700 hover:bg-red-800 mb-2 w-fit px-6 py-2 bg-primary-color text-white rounded-md hover:opacity-80 transition-all cursor-pointer">Törlés</button>' : ""}
     </div>
     </form>
     </main>
@@ -112,6 +113,7 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
   formElement.addEventListener("input", (e) => {
     const target = e.currentTarget as HTMLFormElement;
     const formData = new FormData(target);
+
     formData.forEach((value, key) => {
       switch (key) {
         case "title":
@@ -135,9 +137,9 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
       }
     });
   });
+
   formElement.addEventListener("submit", async (e) => {
     e.preventDefault();
-    console.log("help")
 
     const response = await fetch(`${getApiUrl()}/posts/${currentData.id}`, {
       method: "PUT",
@@ -148,11 +150,32 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
       body: JSON.stringify(currentData),
     });
 
-    console.log(response);
     if (response.ok) {
-      window.location.replace("/?success#/dashboard");
+      window.location.replace("/?success=save#/dashboard");
+      return;
     }
+
+    showToast("Sikertelen mentés", "error");
   });
+
+  document.querySelector("#deleteBtn")?.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const response = await fetch(`${getApiUrl()}/posts/${currentData.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getToken()}`,
+      },
+    });
+
+    if (response.ok) {
+      window.location.replace("/?success=delete#/dashboard");
+      return;
+    }
+
+    showToast("Sikertelen törlés", "error");
+  })
 
   const input = document.getElementById("imageUrl") as HTMLInputElement;
   const imagePreview = document.getElementById(

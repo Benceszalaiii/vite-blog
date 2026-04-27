@@ -58,5 +58,11 @@ export const renderDashboard = async (container: HTMLElement) => {
   // A navbar gombjainak eseménykezelői
   attachNavbarEvents();
 
-  if (window.location.search.includes("success")) showToast("Sikeres mentés", "success", 3000, () => window.location.replace("/#/dashboard"));
+  const url = new URL(window.location.href);
+  if (url.searchParams.has("success")) {
+    switch (url.searchParams.get("success")) {
+      case "save": showToast("Sikeres mentés", "success"); break;
+      case "delete": showToast("Sikeres törlés", "success"); break;
+    }
+  }
 };
