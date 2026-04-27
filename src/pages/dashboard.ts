@@ -2,8 +2,7 @@
 import { fetchPosts } from '../api';
 import { BlogList } from '../components/bloglist';
 import { renderNavbar, attachNavbarEvents } from '../components/navbar';
-import { clearUser, getUser, isLoggedIn } from '../store';
-import { showToast } from '../utils/toast';
+import { getUser, isLoggedIn } from '../store';
 
 export const renderDashboard = async (container: HTMLElement) => {
   // Ha a felhasználó nincs bejelentkezve, átirányítás a login oldalra
@@ -57,12 +56,4 @@ export const renderDashboard = async (container: HTMLElement) => {
   blogList.attachEvents();
   // A navbar gombjainak eseménykezelői
   attachNavbarEvents();
-
-  const url = new URL(window.location.href);
-  if (url.searchParams.has("success")) {
-    switch (url.searchParams.get("success")) {
-      case "save": showToast("Sikeres mentés", "success"); break;
-      case "delete": showToast("Sikeres törlés", "success"); break;
-    }
-  }
 };

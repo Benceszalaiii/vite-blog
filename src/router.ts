@@ -4,6 +4,7 @@ import { renderHome } from "./pages/home";
 import { renderLogin } from "./pages/login";
 import { renderPost } from "./pages/post";
 import { renderTestPage } from "./pages/test";
+import { handleToasts } from "./utils/toast";
 
 export const initRouter = (appElement: HTMLElement) => {
   const router = () => {
@@ -32,4 +33,6 @@ export const initRouter = (appElement: HTMLElement) => {
 
   // Initial call
   router();
+
+  handleToasts();
 };

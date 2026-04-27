@@ -4,6 +4,7 @@ import { fetchCategories, fetchPost, getApiUrl } from "../api";
 import { Category, Post } from "../types";
 import { renderPreview } from "./preview";
 import { showToast } from "../utils/toast";
+import { handleDelete } from "../utils/delete";
 
 const notFoundPage = ({
   message,
@@ -161,20 +162,7 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
   document.querySelector("#deleteBtn")?.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${getApiUrl()}/posts/${currentData.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${getToken()}`,
-      },
-    });
-
-    if (response.ok) {
-      window.location.replace("/?success=delete#/dashboard");
-      return;
-    }
-
-    showToast("Sikertelen törlés", "error");
+    handleDelete(currentData.id.toString(), "dashboard");
   })
 
   const input = document.getElementById("imageUrl") as HTMLInputElement;

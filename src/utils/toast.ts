@@ -1,6 +1,6 @@
 export type ToastType = 'success' | 'error' | 'info';
 
-export function showToast(message: string, type: ToastType = 'info', duration: number = 3000, dispose: (() => void) = (() => {})) {
+export function showToast(message: string, type: ToastType = 'info', duration: number = 3000, dispose: (() => void) = (() => { })) {
   // 1. Check if the container exists, otherwise create it
   let container = document.getElementById('toast-container');
   if (!container) {
@@ -21,7 +21,7 @@ export function showToast(message: string, type: ToastType = 'info', duration: n
   setTimeout(() => {
     // Add a class to animate it out smoothly
     toast.classList.add('fade-out');
-    
+
     // Wait for the fade-out animation to finish before removing from DOM
     setTimeout(() => {
       toast.remove();
@@ -32,4 +32,19 @@ export function showToast(message: string, type: ToastType = 'info', duration: n
       }
     }, 300); // Matches the CSS transition duration
   }, duration);
+}
+
+export function handleToasts() {
+  const url = new URL(window.location.href);
+
+  if (url.searchParams.has("success")) {
+    switch (url.searchParams.get("success")) {
+      case "save": showToast("Sikeres mentés", "success"); break;
+      case "delete": showToast("Sikeres törlés", "success"); break;
+    }
+  } else if (url.searchParams.has("error")) {
+    switch (url.searchParams.get("error")) {
+      case "delete": showToast("Sikertelen törlés", "error"); break;
+    }
+  }
 }
