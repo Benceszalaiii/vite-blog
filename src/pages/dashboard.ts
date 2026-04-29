@@ -1,22 +1,28 @@
 // src/pages/dashboard.ts
-import { fetchPosts } from '../api';
-import { BlogList } from '../components/bloglist';
-import { renderNavbar, attachNavbarEvents } from '../components/navbar';
-import { getUser, isLoggedIn } from '../store';
+import { fetchPosts } from "../api";
+import { BlogList } from "../components/bloglist";
+import { renderNavbar, attachNavbarEvents } from "../components/navbar";
+import { getUser, isLoggedIn } from "../store";
 
 export const renderDashboard = async (container: HTMLElement) => {
   // Ha a felhasználó nincs bejelentkezve, átirányítás a login oldalra
   if (!isLoggedIn()) {
-    window.location.hash = '#/login';
+    window.location.hash = "#/login";
     return;
   }
 
   const user = getUser();
   if (!user || (user?.role !== "admin" && user?.role !== "adminisztrator")) {
-    window.location.hash = '#/';
+    window.location.hash = "#/";
     return;
   }
-  const posts = await fetchPosts({ limit: 20 });
+  const rawPosts = await fetchPosts({ limit: 100 });
+  const posts = {
+    totalCount: rawPosts.totalCount,
+    posts: rawPosts.posts.sort(
+      (a, b) => Date.parse(b.datum) - Date.parse(a.datum),
+    ),
+  };
   const blogList = BlogList(posts.posts);
   container.innerHTML = `
     ${renderNavbar()}
@@ -37,12 +43,15 @@ export const renderDashboard = async (container: HTMLElement) => {
         
         <div class="card min-w-52 w-1/4" style="padding: 2rem; background: var(--surface-color); border-radius: 16px; border: 1px solid var(--surface-border);">
           <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Statisztikák</h3>
-          <p style="font-size: 2.5rem; font-weight: 700;">${posts.posts.filter(post => post.szerzo === user?.nev).length}</p>
+          <p style="font-size: 2.5rem; font-weight: 700;">${posts.posts.filter((post) => post.szerzo === user?.nev).length}</p>
           <p style="color: var(--text-muted);">Saját posztok</p>
         </div>
         <div class="card min-w-52 w-1/4" style="padding: 2rem; background: var(--surface-color); border-radius: 16px; border: 1px solid var(--surface-border);">
           <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Statisztikák</h3>
-          <p style="font-size: 2.5rem; font-weight: 700;">${posts.posts.filter(post => post.szerzo === user?.nev).map(post => post.tartalom.split(" ").length).reduce((a, b) => a + b, 0)}</p>
+          <p style="font-size: 2.5rem; font-weight: 700;">${posts.posts
+            .filter((post) => post.szerzo === user?.nev)
+            .map((post) => post.tartalom.split(" ").length)
+            .reduce((a, b) => a + b, 0)}</p>
           <p style="color: var(--text-muted);">Írt szavak</p>
         </div>
         </div>
