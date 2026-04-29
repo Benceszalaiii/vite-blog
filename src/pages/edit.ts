@@ -89,7 +89,7 @@ export const renderEditPage = async (container: HTMLElement, slug?: string) => {
     <label class=" mb-2 " for="excerpt">Kivonat</label>
     <input required class=" mb-2 w-full border border-neutral-400/30 rounded-sm" type="text" id="excerpt" name="excerpt" value="${currentData.kivonat}" />
     <label class=" mb-2" for="content">Tartalom</label>
-    <textarea class=" mb-2 w-full border border-neutral-400/30 rounded-sm  h-[20vh]" id="content" name="content">${currentData.tartalom}</textarea>
+    <textarea class=" mb-2 w-full border border-neutral-400/30 rounded-sm  h-[20vh] p-2" id="content" name="content">${currentData.tartalom}</textarea>
     <div class="flex flex-row justify-end w-full gap-4">
     <button id="saveBtn" class=" bg-violet-700 hover:bg-violet-800 mb-2 w-fit px-8 py-2 bg-primary-color text-white rounded-md hover:opacity-80 transition-all cursor-pointer" type="submit">Mentés</button>
     <button id="previewBtn" type="button" class="bg-emerald-700 hover:bg-emerald-800 mb-2 w-fit px-8 py-2 bg-primary-color text-white rounded-md hover:opacity-80 transition-all cursor-pointer">Előnézet</button>
